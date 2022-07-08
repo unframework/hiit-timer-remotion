@@ -24,6 +24,8 @@ export const HIITSequence: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: 'white' }}>
+      <Audio src={staticFile('chime.wav')} />
+
       {blips.map((tminus) => (
         <Sequence
           key={tminus}
