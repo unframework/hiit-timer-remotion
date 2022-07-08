@@ -9,8 +9,8 @@ export const RemotionVideo: React.FC = () => {
         component={HIITSequence}
         durationInFrames={TOTAL_S * 24}
         fps={24}
-        width={1280}
-        height={720}
+        width={854}
+        height={480}
       />
     </>
   );
