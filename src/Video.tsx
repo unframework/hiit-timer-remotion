@@ -1,5 +1,5 @@
 import { Composition } from 'remotion';
-import { HIITSequence } from './HIITSequence';
+import { HIITSequence, TOTAL_S } from './HIITSequence';
 
 export const RemotionVideo: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ export const RemotionVideo: React.FC = () => {
       <Composition
         id="HIITSequence"
         component={HIITSequence}
-        durationInFrames={24 * 90}
+        durationInFrames={TOTAL_S * 24}
         fps={24}
         width={1280}
         height={720}

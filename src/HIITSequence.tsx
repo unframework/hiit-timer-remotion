@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Audio,
   AbsoluteFill,
@@ -76,21 +77,49 @@ export const RestClip: React.FC<{ text: string; durationInFrames: number }> = ({
       <div
         className="_progress"
         style={{ width: `${(100 * frame) / durationInFrames}%` }}
-      ></div>
+      />
     </AbsoluteFill>
   );
 };
 
-export const HIITSequence: React.FC = () => {
-  const endFrame = 60 * 24;
+const WARMUP_S = 300;
+const COOLDOWN_S = 300;
+const WORK_S = 30;
+const REST_S = 150;
 
+export const TOTAL_S = WARMUP_S + 5 * (WORK_S + REST_S) - REST_S + COOLDOWN_S;
+
+export const HIITSequence: React.FC = () => {
   return (
     <>
-      <Sequence from={0} durationInFrames={24 * 30}>
-        <WorkClip />
+      <Sequence from={0} durationInFrames={WARMUP_S * 24}>
+        <RestClip text="WARMUP" durationInFrames={WARMUP_S * 24} />
       </Sequence>
-      <Sequence from={24 * 30} durationInFrames={24 * 60}>
-        <RestClip text="NICE" durationInFrames={endFrame} />
+
+      {[0, 1, 2, 3, 4].map((step) => (
+        <React.Fragment key={step}>
+          <Sequence
+            from={(WARMUP_S + step * (WORK_S + REST_S)) * 24}
+            durationInFrames={WORK_S * 24}
+          >
+            <WorkClip />
+          </Sequence>
+          {step < 4 ? (
+            <Sequence
+              from={(WARMUP_S + step * (WORK_S + REST_S) + WORK_S) * 24}
+              durationInFrames={REST_S * 24}
+            >
+              <RestClip text="NICE" durationInFrames={REST_S * 24} />
+            </Sequence>
+          ) : null}
+        </React.Fragment>
+      ))}
+
+      <Sequence
+        from={(WARMUP_S + 5 * (WORK_S + REST_S) - REST_S) * 24}
+        durationInFrames={COOLDOWN_S * 24}
+      >
+        <RestClip text="COOLDOWN" durationInFrames={COOLDOWN_S * 24} />
       </Sequence>
     </>
   );
