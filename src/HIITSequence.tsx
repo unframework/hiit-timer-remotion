@@ -25,7 +25,7 @@ export const WorkClip: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: 'orange' }}>
       {beeps.map((_, index) => (
         <Sequence from={index * 24}>
-          <Audio src={staticFile('active.wav')} />
+          <Audio volume={0.8} src={staticFile('active.wav')} />
         </Sequence>
       ))}
 
@@ -62,7 +62,7 @@ export const RestClip: React.FC<{ text: string; durationInFrames: number }> = ({
           from={durationInFrames - tminus * 24}
           durationInFrames={24}
         >
-          <Audio volume={1.2} src={staticFile('blip.wav')} />
+          <Audio volume={2.5} src={staticFile('blip.wav')} />
         </Sequence>
       ))}
 
