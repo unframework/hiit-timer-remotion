@@ -11,9 +11,9 @@
   height: 100%;
   font-family: 'Press Start 2P';
   font-size: 8rem;
+  color: white;
 }
 
 ._counter.-active {
-  color: white;
   font-size: 12rem;
 }

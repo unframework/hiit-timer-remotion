@@ -35,7 +35,8 @@ export const WorkClip: React.FC = () => {
   );
 };
 
-export const RestClip: React.FC<{ durationInFrames: number }> = ({
+export const RestClip: React.FC<{ text: string; durationInFrames: number }> = ({
+  text,
   durationInFrames,
 }) => {
   const frame = useCurrentFrame();
@@ -50,7 +51,7 @@ export const RestClip: React.FC<{ durationInFrames: number }> = ({
   const blips = [1, 2, 3, 4];
 
   return (
-    <AbsoluteFill style={{ backgroundColor: 'white' }}>
+    <AbsoluteFill style={{ backgroundColor: 'green' }}>
       <Audio src={staticFile('chime.wav')} />
 
       {blips.map((tminus) => (
@@ -60,13 +61,17 @@ export const RestClip: React.FC<{ durationInFrames: number }> = ({
           from={durationInFrames - tminus * 24}
           durationInFrames={24}
         >
-          <Audio src={staticFile('blip.wav')} />
+          <Audio volume={1.2} src={staticFile('blip.wav')} />
         </Sequence>
       ))}
 
-      <div className="_counter">
-        {mm}:{ss}
-      </div>
+      {seconds <= 10 ? (
+        <div className="_counter">
+          {mm}:{ss}
+        </div>
+      ) : (
+        <div className="_counter">{text}</div>
+      )}
     </AbsoluteFill>
   );
 };
@@ -80,7 +85,7 @@ export const HIITSequence: React.FC = () => {
         <WorkClip />
       </Sequence>
       <Sequence from={24 * 30} durationInFrames={24 * 60}>
-        <RestClip durationInFrames={endFrame} />
+        <RestClip text="NICE" durationInFrames={endFrame} />
       </Sequence>
     </>
   );
