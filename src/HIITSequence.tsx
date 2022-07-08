@@ -72,6 +72,11 @@ export const RestClip: React.FC<{ text: string; durationInFrames: number }> = ({
       ) : (
         <div className="_counter">{text}</div>
       )}
+
+      <div
+        className="_progress"
+        style={{ width: `${(100 * frame) / durationInFrames}%` }}
+      ></div>
     </AbsoluteFill>
   );
 };
