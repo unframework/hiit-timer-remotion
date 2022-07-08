@@ -11,7 +11,7 @@ import './HIITSequence.css';
 export const WorkClip: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // count up
+  // Count up
   const seconds = Math.floor(frame / 24);
   const minutes = Math.floor(seconds / 60);
 
@@ -21,14 +21,14 @@ export const WorkClip: React.FC = () => {
   const beeps = [...new Array(30)];
 
   return (
-    <AbsoluteFill style={{ backgroundColor: 'white' }}>
+    <AbsoluteFill style={{ backgroundColor: 'orange' }}>
       {beeps.map((_, index) => (
         <Sequence from={index * 24}>
           <Audio src={staticFile('active.wav')} />
         </Sequence>
       ))}
 
-      <div className="_counter">
+      <div className="_counter -active">
         {mm}:{ss}
       </div>
     </AbsoluteFill>
